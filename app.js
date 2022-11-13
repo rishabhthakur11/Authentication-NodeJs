@@ -79,17 +79,8 @@ app.post("/login", async (req, res) => {
       user.token = token;
       user.password = undefined;
 
-      const options = {
-        expires: new Date(Date.now() + 3 * 24 * 60 * 60 * 1000),
-        httpOnly: true,
-      };
-
       // user
-      res.status(200).cookies("token", token, options).json({
-        success: true,
-        token,
-        user,
-      });
+      res.status(201).json(user);
     }
     res.status(400).send("Invalid Credentials");
   } catch (err) {
@@ -112,4 +103,4 @@ app.use("*", (req, res) => {
   });
 });
 
-module.export = app;
+module.exports = app;
